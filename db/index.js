@@ -76,6 +76,20 @@ const client = new Client('postgres://localhost:5432/bootcamp');
     }
   }
 
+  async function getAllTags() {
+    try {
+      const { rows: tags } = await client.query(`
+        SELECT *
+        FROM tags;
+      `);
+  
+  
+      return tags;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async function updateUser(id, fields = {}) {
     const setString = Object.keys(fields).map(
       (key, index) => `"${ key }"=$${ index + 1 }`
@@ -301,5 +315,6 @@ module.exports = {
   createPostTag,
   addTagsToPost,
   getPostById,
-  getPostsByTagName
+  getPostsByTagName,
+  getAllTags
 }
