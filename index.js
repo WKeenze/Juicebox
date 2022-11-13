@@ -7,11 +7,6 @@ const morgan = require('morgan');
 
 const { client } = require('./db');
 client.connect();
-server.listen(PORT, () => {
-    console.log('The server is up on port', PORT)
-  });
-;
-
 
 server.use(morgan('dev'));
 
@@ -25,6 +20,11 @@ server.use((req, res, next) => {
     next();
 
 });
+
+server.listen(PORT, () => {
+  console.log('The server is up on port', PORT)
+});
+
 
 server.use('/api', apiRouter);
 
