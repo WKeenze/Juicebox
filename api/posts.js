@@ -9,6 +9,12 @@ postsRouter.use((req, res, next) => {
   next();
 });
 
+
+postsRouter.post('/', requireUser, async (req, res, next) => {
+  res.send({ message: 'under construction' });
+});
+
+
 postsRouter.get('/', async (req, res, next) => {
   try {
     
@@ -39,30 +45,30 @@ postsRouter.get('/', async (req, res, next) => {
 
     
 
-postsRouter.post('/', requireUser, async (req, res, next) => {
-  const { title, content, tags = "" } = req.body;
+// postsRouter.post('/', requireUser, async (req, res, next) => {
+//   const { title, content, tags = "" } = req.body;
 
-  const tagArr = tags.trim().split(/\s+/)
+//   const tagArr = tags.trim().split(/\s+/)
  
 
-  // only send the tags if there are some to send
-  if (tagArr.length) {
-    postData.tags = tagArr;
-  }
-  const postData = {title, content, tagArr};
-  try {
-    // add authorId, title, content to postData object
+//   // only send the tags if there are some to send
+//   if (tagArr.length) {
+//     postData.tags = tagArr;
+//   }
+//   const postData = {title, content, tagArr};
+//   try {
+//     // add authorId, title, content to postData object
    
-    const post = await createPost(postData);
-    if(post){}
-    // this will create the post and the tags for us
-    res.send({ message: "This post has been added", post });
+//     const post = await createPost(postData);
+//     if(post){}
+//     // this will create the post and the tags for us
+//     res.send({ message: "This post has been added", post });
 
-    // otherwise, next an appropriate error object 
-  } catch ({ name, message }) {
-    next({ name, message });
-  }
-});
+//     // otherwise, next an appropriate error object 
+//   } catch ({ name, message }) {
+//     next({ name, message });
+//   }
+// });
 
 
 
